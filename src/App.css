@@ -1,38 +1,101 @@
-.App {
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #10002b;
+  color: #fff;
   text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.search_form {
+  width: 60%;
+  color:#e5e5e5;
+  display: flex;
+  border-radius: 20px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.search_input {
+  flex: 3;
+  color:#e5e5e5;
+  padding: 8px;
+  border: 1px solid #000000;
+  border-radius: 20px;
+  font-size: 16px;
+  margin-right: 10px;
+  box-sizing: border-box;
+  box-shadow: 2px 2px 6px #e0aaff;
 }
 
-.App-header {
-  background-color: #282c34;
+.search_button {
+  background-color: #e0aaff;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  cursor: pointer;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+}
+
+
+.container {
+  width: 90%;
   min-height: 100vh;
+  padding: 5%;
+}
+
+.center-content {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.spacer {
+  width: 100%;
+  height: 150px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.spacer2 {
+  width: 100%;
+  height: 50px;
+}
+
+h1 {
+  font-size: 40px;
+  font-weight: bold;
+  margin: 10px 0;
+  text-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+}
+
+.wallet-details-container {
+  background-color: #f5f5f5;
+  color:#14213d;
+  width: 65%;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+  border: 1px solid #000000;
+  box-shadow: 2px 2px 6px #e0aaff;
+
+}
+
+.wallet-details-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.wallet-details-table th, .wallet-details-table td {
+  padding: 8px;
+  border: 1px solid #ccc;
+  text-align: left;
+}
+
+.wallet-details-table th {
+  background-color: #f2f2f2;
 }
