@@ -1,0 +1,19 @@
+/* styles.css */
+.node-graph {
+    margin-top: 20px;
+    background-color: #f5f5f5;
+    border: 1px solid #ddd;
+}
+
+.node {
+    cursor: pointer;
+    transition: fill 0.1s;
+}
+
+.node:hover {
+    fill: rgb(0, 0, 0);
+}
+
+.link {
+    fill: none;
+}
