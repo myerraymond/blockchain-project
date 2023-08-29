@@ -10,21 +10,13 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import blockchainLogo from './blockchain1.png';
-import AboutUs from './AboutUs';
 
 const pages = ['HOME', 'ABOUT'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const settings = ['Profile', 'Account'];
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-
-  const handleOpenNavMenu = (event) => {
-    setAnchorElNav(event.currentTarget);
-  };
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
-  };
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
@@ -61,7 +53,6 @@ function ResponsiveAppBar() {
             BLOCKCHAIN{' '}
             <span style={{ marginLeft: '0.8em',color: '#5A6AE6' }}>DATA ANALYSIS</span>
           </Typography>
-
           <Box sx={{ flexGrow: 1, display: 'flex', justifyContent: 'flex-end' }}>
             {pages.map((page) => (
               <Button
@@ -102,6 +93,7 @@ function ResponsiveAppBar() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
+
               {settings.map((setting) => (
                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
                   <Typography textAlign="center">{setting}</Typography>
