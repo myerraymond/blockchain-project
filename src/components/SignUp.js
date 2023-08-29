@@ -18,16 +18,18 @@ import TableRow from '@mui/material/TableRow';
 import TableCell from '@mui/material/TableCell';
 import './styles.css';
 import ResponsiveAppBar from './SearchBar';
-
+import Alert from '@mui/material/Alert'; // Import Alert component
 
 function NodeGraph({ details }) {
     const graphRef = React.useRef(null);
+    const [anchorEl, setAnchorEl] = React.useState(null);
+
 
     React.useEffect(() => {
         if (details.length > 0) {
-            const width = 800;
+            const width = 700;
             const height = 500;
-            
+
             const svg = d3.select(graphRef.current)
                 .attr('width', width)
                 .attr('height', height);
@@ -42,11 +44,11 @@ function NodeGraph({ details }) {
             const links = [];
 
             const link = svg.selectAll('.link')
-                .data(links)
+                .data(details)
                 .enter()
-                .append('line')
+                .append('g')
                 .attr('class', 'link')
-                .style('stroke', '#999')
+                .style('stroke', 'black')
                 .style('stroke-width', '2px');
 
             // Create nodes (circles) for each detail
@@ -61,12 +63,29 @@ function NodeGraph({ details }) {
                 .call(d3.drag()
                     .on('start', dragStarted)
                     .on('drag', dragged)
-                    .on('end', dragEnded));
-
+                    .on('end', dragEnded))
+                .on('mouseover', handleMouseOver) // Add mouseover event
+                .on('mouseout', handleMouseOut)    // Add mouseout event
+            
+                
             function dragStarted(event, d) {
                 if (!event.active) simulation.alphaTarget(0.2).restart();
                 d.fx = d.x;
                 d.fy = d.y;
+            }
+            
+            function handleMouseOver(event, d) {
+                d3.select(this)
+                    .transition()
+                    .attr('r', 25); // Increase circle radius on hover
+                // Add any other effects you want on hover
+            }
+
+            function handleMouseOut(event, d) {
+                d3.select(this)
+                    .transition()
+                    .attr('r', 20); // Restore circle radius on mouseout
+                // Remove any hover effects
             }
 
             function dragged(event, d) {
@@ -85,6 +104,7 @@ function NodeGraph({ details }) {
                     .attr('cx', d => d.x)
                     .attr('cy', d => d.y);
             });
+            
         }
     }, [details]);
 
@@ -96,7 +116,7 @@ function NodeGraph({ details }) {
             <defs>
                 <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
                     <stop offset="0%" style={{ stopColor: 'blue', stopOpacity: 1 }} />
-                    <stop offset="100%" style={{ stopColor: 'purple', stopOpacity: 1 }} />
+                    <stop offset="100%" style={{ stopColor: 'red', stopOpacity: 1 }} />
                 </linearGradient>
                 <filter id="drop-shadow" x="-20%" y="-20%" width="150%" height="150%">
                     <feGaussianBlur in="SourceAlpha" stdDeviation="4" result="blur" />
@@ -146,14 +166,14 @@ const defaultTheme = createTheme({
     },
 });
 
-function DetailsTable({ details }) {
+function DetailedDetailsTable({ details }) {
     return (
         <TableContainer>
-            <Table aria-label="Details Table">
+            <Table aria-label="Detailed Details Table">
                 <TableBody>
                     {details.map((row) => (
                         <TableRow key={row.key}>
-                            <TableCell>{row.key}</TableCell>
+                            <TableCell><strong>{row.key}</strong></TableCell>
                             <TableCell>{row.value}</TableCell>
                         </TableRow>
                     ))}
@@ -164,10 +184,9 @@ function DetailsTable({ details }) {
 }
 
 export default function SignUp() {
-    const activeTab = 'ABOUT'; // Change this based on your active tab logic
-
     const [searchedAddress, setSearchedAddress] = React.useState('');
     const [addressDetails, setAddressDetails] = React.useState([]);
+    const [showAlert, setShowAlert] = React.useState(false); // State to control the visibility of the alert
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -183,16 +202,25 @@ export default function SignUp() {
                 createData('Balance', fetchedDetails.balance),
                 createData('Transactions', fetchedDetails.transactions),
                 createData('Last Transaction', fetchedDetails.lastTransactionTime),
+                createData('Total Received', fetchedDetails.totalReceived),
+                createData('Total Sent', fetchedDetails.totalSent),
+                createData('Active Since', fetchedDetails.activeSince),
+                createData('Transaction ID', fetchedDetails.transactionID),
+                createData('Input', fetchedDetails.input),
+                createData('Output', fetchedDetails.output),
+                createData('Transaction Feed', fetchedDetails.transactionFee),
+                createData('Digital Signature', fetchedDetails.digitalSignature),
             ];
 
             setSearchedAddress(address);
             setAddressDetails(details);
+            setShowAlert(true); // Show the success alert
         } else {
             setSearchedAddress('');
             setAddressDetails([]);
+            setShowAlert(false); // Hide the alert if no details found
         }
     };
-
     // Simulate fetching address details
     async function fetchAddressDetails(address) {
         // Replace this with your actual API/database call
@@ -203,28 +231,18 @@ export default function SignUp() {
                 address: address,
                 balance: '100 BTC',
                 transactions: '50',
-                lastTransactionTime: '2023-08-23 10:30:00', // Replace with actual timestamp
-                // Add more details here
-            };
-        } catch (error) {
-            console.error('Error fetching address details:', error);
-            return null;
-        }
-    }
+                lastTransactionTime: '2023-08-23 10:30:00',
 
+                transactionID: '0x4a5b3e8d9c2b1a0f6e7d8c9b2a1f0e6d',
+                input: '0x1234567890abcdef',
+                output: '0xabcdef1234567890',
+                transactionFee: '0.001 BTC',
+                digitalSignature: '3045022100...0220049D',
 
-    // Simulate fetching address details
-    async function fetchAddressDetails(address) {
-        // Replace this with your actual API/database call
-        // You can use fetch or axios to fetch data from an API
-        try {
-            // Example response structure
-            return {
-                address: address,
-                balance: '100 BTC',
-                transactions: '50',
-                lastTransactionTime: '2023-08-23 10:30:00', // Replace with actual timestamp
-                // Add more details here
+                totalReceived: '200 BTC', 
+                totalSent: '100 BTC', 
+                activeSince: '2017-05-15',
+            
             };
         } catch (error) {
             console.error('Error fetching address details:', error);
@@ -262,7 +280,7 @@ export default function SignUp() {
                     </Typography>
                     <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
                         <Grid container spacing={2}>
-                            <Grid item xs={12}> {/* Change s to xs */}
+                            <Grid item xs={12}>
                                 <TextField
                                     fullWidth
                                     id="wallet"
@@ -270,11 +288,18 @@ export default function SignUp() {
                                     name="wallet"
                                     autoComplete="wallet"
                                 />
-                                {addressDetails.length > 0 && (
-                                    <DetailsTable details={addressDetails} />
+                                {showAlert && ( // Show the alert when showAlert is true
+                                    <Alert variant="filled" severity="success" sx={{ mt: 1}}>
+                                        Wallet address found!
+                                    </Alert>
                                 )}
+                                {addressDetails.length > 0 && (
+                                    <DetailedDetailsTable details={addressDetails} />
+                                )}
+                                
                             </Grid>
                         </Grid>
+
                         <Button
                             type="submit"
                             fullWidth
@@ -283,9 +308,12 @@ export default function SignUp() {
                         >
                             Search
                         </Button>
-                        {addressDetails.length > 0 && (
+                        
+                         {addressDetails.length > 0 && (
                             <NodeGraph details={addressDetails} />
                         )}
+                         
+
                     </Box>
                 </Box>
                 <Copyright sx={{ mt: 5 }} />
@@ -293,3 +321,4 @@ export default function SignUp() {
         </ThemeProvider>
     );
 }
+

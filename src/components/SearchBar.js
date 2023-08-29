@@ -10,6 +10,7 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import blockchainLogo from './blockchain1.png';
+import AboutUs from './AboutUs';
 
 const pages = ['HOME', 'ABOUT'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
@@ -71,8 +72,8 @@ function ResponsiveAppBar() {
                     color: 'white',
                     display: 'block',
                     '&:hover': {
-                      color: '#29335c',
-                      borderBottom: '2px solid #5A6AE6',
+                      color: 'white',
+                      border: '2px solid #5A6AE6',
                     },
                   }}
               >
@@ -80,6 +81,7 @@ function ResponsiveAppBar() {
               </Button>
             ))}
           </Box>
+
 
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
