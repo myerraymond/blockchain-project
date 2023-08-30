@@ -10,28 +10,21 @@ import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import './main.css';
+import blockchainImage from './blockchain1.png'; // Update the path accordingly
 
 const pages = ['Home', 'About Us', 'Blog'];
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
-  };
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
-  };
-
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
   };
 
   return (
@@ -54,13 +47,17 @@ function ResponsiveAppBar() {
               textDecoration: 'none',
             }}
           >
-            LOGO
+            BLOCKCHAIN ANALYSIS
           </Typography>
 
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+          {/* Move the Box component to the right */}
+          <Box sx={{ flexGrow: 1 }} />
+
+          {/* Mobile Menu (Hamburger Menu) */}
+          <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
             <IconButton
               size="large"
-              aria-label="account of current user"
+              aria-label="menu"
               aria-controls="menu-appbar"
               aria-haspopup="true"
               onClick={handleOpenNavMenu}
@@ -72,13 +69,13 @@ function ResponsiveAppBar() {
               id="menu-appbar"
               anchorEl={anchorElNav}
               anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
+                vertical: 'top',
+                horizontal: 'right', // Aligns the menu to the right
               }}
               keepMounted
               transformOrigin={{
                 vertical: 'top',
-                horizontal: 'left',
+                horizontal: 'right', // Aligns the menu to the right
               }}
               open={Boolean(anchorElNav)}
               onClose={handleCloseNavMenu}
@@ -89,14 +86,16 @@ function ResponsiveAppBar() {
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
                   <Typography textAlign="center">
-                    <Link to={`/${page}`}> 
-                    {page}
+                    <Link to={`/${page}`}>
+                      {page}
                     </Link>
                   </Typography>
                 </MenuItem>
               ))}
             </Menu>
           </Box>
+
+          {/* Rest of the code */}
           <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
           <Typography
             variant="h5"
@@ -121,9 +120,9 @@ function ResponsiveAppBar() {
               <Button variant="outlined" size="large"
                 key={page}
                 onClick={handleCloseNavMenu}
-                sx={{ 
+                sx={{
                   my: 1,
-                  ml: index === 0 ? 0 : 2, 
+                  ml: index === 0 ? 'auto' : 2, // Use 'auto' for the first button to align to the right
                   color: 'black',
                   background: 'white',
                   display: 'block',
@@ -131,8 +130,8 @@ function ResponsiveAppBar() {
                 }}
               >
                 <Link to={`/${page}`}> 
-                    {page}
-                    </Link>
+                  {page}
+                </Link>
               </Button>
             ))}
           </Box>
@@ -141,4 +140,5 @@ function ResponsiveAppBar() {
     </AppBar>
   );
 }
+
 export default ResponsiveAppBar;
