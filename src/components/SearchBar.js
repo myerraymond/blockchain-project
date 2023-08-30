@@ -9,8 +9,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 import './main.css';
 import blockchainImage from './blockchain1.png'; // Update the path accordingly
 
@@ -28,32 +27,34 @@ function ResponsiveAppBar() {
   };
 
   return (
-    <AppBar position="static">
+    <AppBar
+      position="static"
+      sx={{
+        background: 'linear-gradient(to left, #3498db, #2c3e50)', 
+      }}
+    >
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+          
           <Typography
             variant="h6"
             noWrap
             component="a"
             href="/"
             sx={{
-              mr: 2,
-              display: { xs: 'none', md: 'flex' },
+              flexGrow: 1,
               fontFamily: 'monospace',
               fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
+              letterSpacing: '.2rem',
+              color: '#FFF', // Text color
               textDecoration: 'none',
+              fontSize: '1.5rem', // Adjust font size
             }}
           >
             BLOCKCHAIN ANALYSIS
           </Typography>
 
-          {/* Move the Box component to the right */}
-          <Box sx={{ flexGrow: 1 }} />
-
-          {/* Mobile Menu (Hamburger Menu) */}
+          {/* Hamburger Menu */}
           <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
             <IconButton
               size="large"
@@ -70,12 +71,12 @@ function ResponsiveAppBar() {
               anchorEl={anchorElNav}
               anchorOrigin={{
                 vertical: 'top',
-                horizontal: 'right', // Aligns the menu to the right
+                horizontal: 'right',
               }}
               keepMounted
               transformOrigin={{
                 vertical: 'top',
-                horizontal: 'right', // Aligns the menu to the right
+                horizontal: 'right',
               }}
               open={Boolean(anchorElNav)}
               onClose={handleCloseNavMenu}
@@ -84,9 +85,19 @@ function ResponsiveAppBar() {
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
+                <MenuItem
+                  key={page}
+                  onClick={handleCloseNavMenu}
+                  sx={{
+                    color: '#333', // Menu item text color
+                    '&:hover': {
+                      background: '#FFF', // Hover background color
+                      
+                    },
+                  }}
+                >
                   <Typography textAlign="center">
-                    <Link to={`/${page}`}>
+                    <Link to={`/${page}`} sx={{ textDecoration: 'none', color: 'inherit' }}>
                       {page}
                     </Link>
                   </Typography>
@@ -95,41 +106,24 @@ function ResponsiveAppBar() {
             </Menu>
           </Box>
 
-          {/* Rest of the code */}
-          <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
-          <Typography
-            variant="h5"
-            noWrap
-            component="a"
-            href="/"
-            sx={{
-              mr: 2,
-              display: { xs: 'flex', md: 'none' },
-              flexGrow: 1,
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
-          >
-            BLOCKCHAIN ANALYSIS
-          </Typography>
+          {/* Navigation Links */}
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page, index) => (
-              <Button variant="outlined" size="large"
+              <Button
+                variant="text"
+                size="large"
                 key={page}
                 onClick={handleCloseNavMenu}
                 sx={{
-                  my: 1,
-                  ml: index === 0 ? 'auto' : 2, // Use 'auto' for the first button to align to the right
-                  color: 'black',
-                  background: 'white',
-                  display: 'block',
-                  borderRadius: '4px',
+                  color: '#FFF', // Button text color
+                  fontSize: '1rem',
+                  '&:hover': {
+                    color: '#B84592', // Hover text color
+                  },
+                  ml: index === 0 ? 'auto' : 2,
                 }}
               >
-                <Link to={`/${page}`}> 
+                <Link to={`/${page}`} sx={{ textDecoration: 'none', color: 'inherit' }}>
                   {page}
                 </Link>
               </Button>
