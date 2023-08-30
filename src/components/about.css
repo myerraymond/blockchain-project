@@ -1,4 +1,4 @@
-.container {
+/* .container { 
     max-width: 60%;
     margin: 0 auto;
     padding: 20px;
@@ -21,7 +21,7 @@
     padding: 20px;
     text-align: center;
   }
-/*Jjakhskda  */
+
   
   .profile-img {
     max-width: 100%;
@@ -55,4 +55,187 @@
   a:hover {
     color: #007bff;
   }
+*/
+
+
+
+/* new code added here */
+.container {
+    max-width: 60%;
+    margin: 0 auto;
+    padding: 80px;
+  } 
+
+
+   
+  .heading {
+    font-size: 60px;
+    margin-bottom: 20px;
+  } 
+  
+
+ .profiles {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+
+  } 
+  
+  .profile {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .profile-img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+    border-radius: 50%;
+  }
+
+  .profile .profile-img{
+    height: 260px;
+    width: 260px;
+    border-radius: 50%;
+    filter: grayscale(100%);
+    cursor: pointer;
+    transition: 400ms;
+  }
+
+
+  
+  .user-name {
+    font-size: 20px;
+    margin: 10px 0;
+  }
+  
+  h5 {
+    font-size: 16px;
+    color: #888;
+    margin: 10px 0;
+  }
+  
+  p {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  
+  a {
+    display: block;
+    color: #333;
+    text-decoration: none;
+    margin-top: 10px;
+  }
+  
+  a:hover {
+    color: #007bff;
+  }
+  .profile:hover .profile-img{
+    filter: grayscale(0);
+  }
+  
+  
+
+/* .container{
+  margin: 20px 40px;
+  color: white;
+}
+
+.heading{
+  font-size: 60px;
+  color: white;
+}
+
+.heading-span{
+  font-style: italic;
+  color: white;
+}
+
+.profiles{
+  display: flex;
+  justify-content: space-around;
+  margin: 20px 80px;
+
+}
+
+.profile{
+  flex-basis: 260px;
+}
+
+p {
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.profile .profile-img{
+  height: 260px;
+  width: 260px;
+  border-radius: 50%;
+  filter: grayscale(100%);
+  cursor: pointer;
+  transition: 400ms;
+}
+
+.profile:hover .profile-img{
+  filter: grayscale(0);
+}
+
+.user-name{
+  margin-top: 30px;
+  font-size: 35px;
+}
+
+.profile h5{
+  font-size: 18px;
+  font-weight: 100;
+  letter-spacing: 3px;
+  color: #cccc;
+}
+
+.profile p{
+  font-size: 16px;
+  margin-top: 20px;
+  text-align: justify;
+} */
+
+@media only screen and (max-width:1150px) {
+  .profiles{
+    flex-direction: column;
+  }
+
+  .profile{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .profile p{
+    text-align: center;
+    margin: 20px 60px 80px 60px;
+    font-size: 20px;
+  }
+}
+
+@media only screen and (max-width:900px){
+  .heading{
+    font-size: 40px;
+    color: white;
+    text-align: center;
+
+  }
+
+  .heading span{
+    font-size: 15px;
+  }
+
+  .profiles{
+    margin: 20px 0;
+  }
+
+  .profile p{
+    margin: 20px 10px 80px 10px;
+  }
+}
   
