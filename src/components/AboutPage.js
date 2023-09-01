@@ -77,11 +77,10 @@ const About = () => {
           <img src={myerImage} className="profile-img" alt="Profile" />
 
           <h3 className="user-name">Myer</h3>
-          <h5>FrontEnd Developer</h5>
+          <h5>AI Enthusiast</h5>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae
-            consequatur, architecto delectus magni pariatur hic explicabo
-            praesentium ipsa nisi asperiores suscipit animi.
+            Hey! My name is Myer, i am currently in my 2nd year of a computer science degree!
+            I have a huge passion for technology and a deep passion for AI and understanding machine-human interactions.
           </p>
         </div>
         <div className="profile">
