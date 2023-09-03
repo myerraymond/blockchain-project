@@ -9,7 +9,9 @@ import AboutUs from "./components/AboutPage";
 import Blog from "./components/Blog";
 
 
+
 function App() {
+
   const defaultTheme = createTheme({
     palette: {
       background: {

@@ -8,8 +8,9 @@ function NodeGraph({ details }) {
 
     React.useEffect(() => {
         if (details.length > 0) {
-            const width = 700;
-            const height = 500;
+            
+            const width = 928;
+            const height = 600;
 
             const svg = d3.select(graphRef.current)
                 .attr('width', width)
@@ -22,15 +23,15 @@ function NodeGraph({ details }) {
                 .force('link', d3.forceLink([]).id(d => d.key));
 
             // Create links between nodes (none in this example)
-            // const links = [];
+            const links = [];
 
-         //   const link = svg.selectAll('.link')
-           //     .data(details)
-             //   .enter()
-               // .append('g')
-               // .attr('class', 'link')
-               // .style('stroke', 'black')
-                //.style('stroke-width', '2px');
+           const link = svg.selectAll('.link')
+               .data(details)
+               .enter()
+               .append('g')
+               .attr('class', 'link')
+               .style('stroke', 'black')
+                .style('stroke-width', '2px');
 
             // Create nodes (circles) for each detail
             const nodes = svg.selectAll('.node')

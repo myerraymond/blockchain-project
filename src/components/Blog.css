@@ -1,0 +1,79 @@
+.blog-container {
+    background-color: #f9f9f9;
+    color: #333;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .blog-title {
+    font-size: 2.5rem;
+    text-align: center;
+    color: #007bff; /* Blue color for the title */
+    margin-bottom: 10px;
+  }
+  
+  .blog-introduction {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+  }
+  
+  /* Style section titles with a background color and bold text */
+  .section-title {
+    font-size: 1.5rem;
+    background-color:#2e445b;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 6px;
+    margin-bottom: 10px;
+  }
+  
+  .blog-section {
+    margin-bottom: 30px;
+    padding: 16px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+  }
+  
+  .blog-conclusion {
+    background-color: #f5f5f5;
+    padding: 15px;
+    border-radius: 5px;
+  }
+  
+  .image-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px 0;
+  }
+  
+  .design-image,
+  .figma-image {
+    width: 80%;
+    max-width: 700px;
+    height: auto;
+    margin: 11px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 5px;
+    box-sizing: border-box;
+    transition: transform 0.8s;
+    cursor: pointer; 
+  }
+  
+  .design-image:hover,
+  .figma-image:hover {
+    transform: scale(1.1);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  
+  a:hover {
+    color: #0056b3;
+  }
+  
+  p {
+    margin-bottom: 10px;
+  }

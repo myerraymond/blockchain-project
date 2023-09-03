@@ -18,6 +18,8 @@ import TableCell from '@mui/material/TableCell';
 import Alert from '@mui/material/Alert'; // Import Alert component
 import NodeGraph from './NodeGraph.js';
 
+
+
 function createData(key, value) {
   return { key, value };
 }
@@ -184,15 +186,13 @@ function App() {
             >
               Search
             </Button>
-
-
-
-            {addressDetails.length > 0 && (
-              <NodeGraph details={addressDetails} />
-            )}
-
-
           </Box>
+
+          {addressDetails.length > 0 && (
+            <NodeGraph details={addressDetails} />
+          )}
+
+        
         </Box>
       </Container>
     </ThemeProvider>
