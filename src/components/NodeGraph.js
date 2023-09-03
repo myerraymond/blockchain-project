@@ -1,36 +1,45 @@
+// Import necessary libraries
 import * as React from 'react';
 import * as d3 from 'd3';
 import './styles.css';
 
+// Define the function (NodeGraph)
 function NodeGraph({ details }) {
+    // Creates a reference to the svg element
     const graphRef = React.useRef(null);
 
-
+    // Use the useEffect hook, for performing DE data visualisation
     React.useEffect(() => {
         if (details.length > 0) {
-            
+            // Defining width and ehight
             const width = 928;
             const height = 600;
 
+             // Create links between nodes (none in this example)
+             const links = [
+                { source: details[0], target: details[1] },
+                { source: details[1], target: details[2] },
+                { source: details[2], target: details[0] },
+            ];
+
+            // Select the SVG element using D3, assign width and height
             const svg = d3.select(graphRef.current)
                 .attr('width', width)
                 .attr('height', height);
 
-            // Create a simulation
+            // Create a D3 simulation
             const simulation = d3.forceSimulation(details)
                 .force('center', d3.forceCenter(width / 2, height / 2))
                 .force('charge', d3.forceManyBody().strength(-30))
                 .force('link', d3.forceLink([]).id(d => d.key));
 
-            // Create links between nodes (none in this example)
-            const links = [];
-
-           const link = svg.selectAll('.link')
-               .data(details)
-               .enter()
-               .append('g')
-               .attr('class', 'link')
-               .style('stroke', 'black')
+            // Select and create link elements (none)
+            const link = svg.selectAll('.link')
+                .data(details)
+                .enter()
+                .append('g')
+                .attr('class', 'link')
+                .style('stroke', 'black')
                 .style('stroke-width', '2px');
 
             // Create nodes (circles) for each detail
@@ -48,57 +57,63 @@ function NodeGraph({ details }) {
                     .on('end', dragEnded))
                 .on('mouseover', handleMouseOver) // Add mouseover event
                 .on('mouseout', handleMouseOut)    // Add mouseout event
-            
-                
+
+            // Define function for handling drags    
             function dragStarted(event, d) {
                 if (!event.active) simulation.alphaTarget(0.2).restart();
                 d.fx = d.x;
                 d.fy = d.y;
             }
-            
+
+            // Define function for handling mouseover
             function handleMouseOver(event, d) {
                 d3.select(this)
                     .transition()
-                    .attr('r', 25); // Increase circle radius on hover
-                // Add any other effects you want on hover
+                    .attr('r', 25);
             }
 
+            // Define function for handling mouseout
             function handleMouseOut(event, d) {
                 d3.select(this)
                     .transition()
-                    .attr('r', 20); // Restore circle radius on mouseout
-                // Remove any hover effects
+                    .attr('r', 20);
             }
 
+            // Define function for handling drag
             function dragged(event, d) {
                 d.fx = event.x;
                 d.fy = event.y;
             }
 
+            // Define function for drag end
             function dragEnded(event, d) {
                 if (!event.active) simulation.alphaTarget(0);
                 d.fx = null;
                 d.fy = null;
             }
 
+            // Update the positions of nodes in the simulation
             simulation.on('tick', () => {
                 nodes
                     .attr('cx', d => d.x)
                     .attr('cy', d => d.y);
             });
-            
+
         }
-    }, [details]);
+    }, [details]); // Execute the effect when 'details' prop changes
 
     return (
+        // Render the SVG element with custom css
         <svg
             ref={graphRef}
             className="node-graph"
         >
+            {/* Define SVG gradients and filters */}
+
             <defs>
                 <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" style={{ stopColor: 'blue', stopOpacity: 1 }} />
-                    <stop offset="100%" style={{ stopColor: 'red', stopOpacity: 1 }} />
+                    <stop offset="0%" style={{ stopColor: '#3498db', stopOpacity: 1 }} />
+                    <stop offset="100%" style={{ stopColor: '#2c3e50', stopOpacity: 1 }} />
                 </linearGradient>
                 <filter id="drop-shadow" x="-20%" y="-20%" width="150%" height="150%">
                     <feGaussianBlur in="SourceAlpha" stdDeviation="4" result="blur" />
@@ -113,4 +128,4 @@ function NodeGraph({ details }) {
     );
 }
 
-export default NodeGraph;
+export default NodeGraph; // Export the NodeGraph component

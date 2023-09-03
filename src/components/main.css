@@ -26,7 +26,7 @@ header {
 }
 
 nav {
-    margin-left: auto; /* Move the nav to the right */
+    margin-left: auto;
 }
 
 nav a {
@@ -88,9 +88,9 @@ nav {
 }
 
 .logo {
-	width: 40px; /* Adjust as needed */
-	height: auto; /* Maintain aspect ratio */
-	margin-right: 10px; /* Add space between logo and text */
+	width: 40px; 
+	height: auto;
+	margin-right: 10px;
 }
 
 @media only screen and (max-width: 1024px) {

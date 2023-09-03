@@ -10,7 +10,7 @@
   .blog-title {
     font-size: 2.5rem;
     text-align: center;
-    color: #2e445b; /* Blue color for the title */
+    color: #2e445b;
     margin-bottom: 10px;
   }
   
@@ -19,7 +19,6 @@
     margin-bottom: 20px;
   }
   
-  /* Style section titles with a background color and bold text */
   .section-title {
     font-size: 1.5rem;
     background-color:#2e445b;

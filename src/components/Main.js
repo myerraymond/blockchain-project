@@ -14,17 +14,16 @@ import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableRow from '@mui/material/TableRow';
 import TableCell from '@mui/material/TableCell';
-// import './styles.css';
-import Alert from '@mui/material/Alert'; // Import Alert component
+import Alert from '@mui/material/Alert'; 
 import NodeGraph from './NodeGraph.js';
 
 
-
+// Function to create a data row for detailed table
 function createData(key, value) {
   return { key, value };
 }
 
-
+// Define the main function of the component named DetailedDetailsTable
 function DetailedDetailsTable({ details }) {
   return (
     <TableContainer>
@@ -43,40 +42,43 @@ function DetailedDetailsTable({ details }) {
 }
 
 
+// Create a default theme
 const defaultTheme = createTheme({
   palette: {
     background: {
       default: 'white',
     },
     primary: {
-      main: '#29335c', // Change the primary color
+      main: '#29335c',
     },
     secondary: {
-      main: '#db2b39', // Change the secondary color
+      main: '#db2b39',
     },
   },
   typography: {
-    fontFamily: 'Arial, sans-serif', // Change the default font
+    fontFamily: 'Arial, sans-serif',
   },
 });
 
+
+// Define the main function component named App
 function App() {
+  // Define state variables for the searched address, address details, and alert visibility
   const [searchedAddress, setSearchedAddress] = React.useState('');
   const [addressDetails, setAddressDetails] = React.useState([]);
-  const [showAlert, setShowAlert] = React.useState(false); // State to control the visibility of the alert
+  const [showAlert, setShowAlert] = React.useState(false);
 
-
-
-
+  // Fucntion to handle form submission when searching for an address
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     const address = data.get('wallet');
 
-    // Simulate fetching address details from an API/database
+    // Simulate fetching address details (will be replaced with actual API)
     const fetchedDetails = await fetchAddressDetails(address);
 
     if (fetchedDetails) {
+      // Create an array of details using the createData function
       const details = [
         createData('Address', fetchedDetails.address),
         createData('Balance', fetchedDetails.balance),
@@ -92,21 +94,22 @@ function App() {
         createData('Digital Signature', fetchedDetails.digitalSignature),
       ];
 
+      // Set state variables to display address details and show success alert
       setSearchedAddress(address);
       setAddressDetails(details);
-      setShowAlert(true); // Show the success alert
+      setShowAlert(true); 
     } else {
+      // Clear state variables and hide the alert in case of an error or no data found
       setSearchedAddress('');
       setAddressDetails([]);
-      setShowAlert(false); // Hide the alert if no details found
+      setShowAlert(false);
     }
   };
-  // Simulate fetching address details
+  
+  // simulated function to fetch address details (replace with actual API eventually)
   async function fetchAddressDetails(address) {
-    // Replace this with your actual API/database call
-    // You can use fetch or axios to fetch data from an API
     try {
-      // Example response structure
+      // Return sample address details (will be replaced API logic)
       return {
         address: address,
         balance: '100 BTC',
@@ -130,7 +133,7 @@ function App() {
     }
   };
 
-
+  // Render the main application content
   return (
     <ThemeProvider theme={defaultTheme}>
       <CssBaseline />
@@ -199,4 +202,4 @@ function App() {
   );
 }
 
-export default App;
+export default App; // Export the App component

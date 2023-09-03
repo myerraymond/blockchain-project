@@ -1,3 +1,4 @@
+// import required libraries and folders
 import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -11,17 +12,21 @@ import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import { Link } from 'react-router-dom';
 import './main.css';
-import blockchainImage from './blockchain1.png'; // Update the path accordingly
 
+// Defines and array of page names for navigation
 const pages = ['Home', 'About Us', 'Blog'];
 
+// Create a functional component ReponsiveAppBar
 function ResponsiveAppBar() {
+  // Define the state for the navigation menu
   const [anchorElNav, setAnchorElNav] = React.useState(null);
 
+  // Function to open navmenu
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
 
+  // Function to close the navmenu
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
@@ -30,12 +35,13 @@ function ResponsiveAppBar() {
     <AppBar
       position="static"
       sx={{
-        background: 'linear-gradient(to left, #3498db, #2c3e50)', 
+        background: 'linear-gradient(to left, #3498db, #2c3e50)',
       }}
     >
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          
+          {/* Brand logo and title */}
+
           <Typography
             variant="h6"
             noWrap
@@ -46,15 +52,15 @@ function ResponsiveAppBar() {
               fontFamily: 'monospace',
               fontWeight: 700,
               letterSpacing: '.2rem',
-              color: '#FFF', // Text color
+              color: '#FFF',
               textDecoration: 'none',
-              fontSize: '1.5rem', // Adjust font size
+              fontSize: '1.5rem',
             }}
           >
             BLOCKCHAIN ANALYSIS
           </Typography>
+          {/* Mobile navigation menu */}
 
-          {/* Hamburger Menu */}
           <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
             <IconButton
               size="large"
@@ -84,15 +90,17 @@ function ResponsiveAppBar() {
                 display: { xs: 'block', md: 'none' },
               }}
             >
+              {/* Generate navigation links for mobile */}
+
               {pages.map((page) => (
                 <MenuItem
                   key={page}
                   onClick={handleCloseNavMenu}
                   sx={{
-                    color: '#333', // Menu item text color
+                    color: '#333',
                     '&:hover': {
-                      background: '#FFF', // Hover background color
-                      
+                      background: '#FFF',
+
                     },
                   }}
                 >
@@ -105,8 +113,8 @@ function ResponsiveAppBar() {
               ))}
             </Menu>
           </Box>
+          {/* Desktop navigation links */}
 
-          {/* Navigation Links */}
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page, index) => (
               <Button
@@ -115,10 +123,10 @@ function ResponsiveAppBar() {
                 key={page}
                 onClick={handleCloseNavMenu}
                 sx={{
-                  color: '#FFF', // Button text color
+                  color: '#FFF',
                   fontSize: '1rem',
                   '&:hover': {
-                    color: '#B84592', // Hover text color
+                    color: '#B84592',
                   },
                   ml: index === 0 ? 'auto' : 2,
                 }}
@@ -135,4 +143,4 @@ function ResponsiveAppBar() {
   );
 }
 
-export default ResponsiveAppBar;
+export default ResponsiveAppBar; // Export the ReponsiveAppBar

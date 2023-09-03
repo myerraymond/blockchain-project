@@ -59,7 +59,7 @@
 // new code added here
 
 import React from "react";
-import "./about.css"; // Import the CSS file
+import "./about.css";
 import myerImage from "./myer.png";
 import sinhaImage from "./sinha.png";
 import yasiImage from "./yasi.png";
@@ -73,7 +73,6 @@ const About = () => {
 
       <div className="profiles">
         <div className="profile">
-          {/* insert image here */}
           <img src={myerImage} className="profile-img" alt="Profile" />
 
           <h3 className="user-name">Myer</h3>
@@ -84,7 +83,6 @@ const About = () => {
           </p>
         </div>
         <div className="profile">
-        {/* insert the image here */}
           <img src={sinhaImage} className="profile-img" alt="Profile" />
 
           <h3 className="user-name">Sinha</h3>
@@ -95,7 +93,6 @@ const About = () => {
           </p>
         </div>
         <div className="profile">
-          {/* insert image here */}
           <img src={yasiImage} className="profile-img" alt="Profile" />
 
           <h3 className="user-name">Yasindu</h3>
