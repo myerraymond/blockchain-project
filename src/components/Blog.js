@@ -8,13 +8,13 @@ const Blog = () => {
   return (
     <div className="blog-container">
       <h1 className="blog-title">Evolution of Our Project Design</h1>
-      <p className="blog-introduction">
+      <p className="blog-introduction"> {/* Introduction */}
         Welcome to our project blog! In this post, we'll take you through the
         journey of how our design evolved, the ideas behind it, and the
         challenges we encountered.
       </p>
       <div className="blog-section">
-        <h2 className="section-title">Project Description</h2>
+        <h2 className="section-title">Project Description</h2> {/* Project Description */}
         <p>
         The main goal of our project, the Blockchain Transaction Information Visualization System, 
         revolves around the seamless presentation and dynamic exploration of blockchain transaction data.
@@ -26,7 +26,7 @@ const Blog = () => {
       </div>
 
       <div className="blog-section">
-        <h2 className="section-title">Languages and Technologies</h2>
+        <h2 className="section-title">Languages and Technologies</h2> {/* Project description content */}
         <p>
         Our project has harnessed a toolkit of essential languages and technologies. These include HTML, CSS, and JavaScript, forming the foundational pillars that underpin the development of our website's frontend. 
         Building upon this foundation, we've leveraged React, a powerful and dynamic framework, to create a seamless and interactive user experience. 
@@ -36,7 +36,7 @@ const Blog = () => {
       </div>
 
       <div className="blog-section">
-        <h2 className="section-title">Evolution of Design</h2>
+        <h2 className="section-title">Evolution of Design</h2> {/* Evolution of Design */}
         <p>
           As we started implementing our initial design, we realized the need to
           refine and enhance it. User feedback played a crucial role in shaping our
@@ -69,7 +69,7 @@ const Blog = () => {
       </div>
 
       <div className="blog-section">
-        <h2 className="section-title">Challenges and Solutions</h2>
+        <h2 className="section-title">Challenges and Solutions</h2> {/* Challenges and Solutions */}
         <p>
         One of the  challenges we encountered during our project was an unexpected issue with the navigation bar. 
         Despite clicking on the desired pages and observing the URL changing accordingly, we were not able to navigate to the intended destinations. 
@@ -79,7 +79,8 @@ const Blog = () => {
         </p>
       </div>
 
-      <div className="blog-conclusion">
+      <div className="blog-conclusion">{/* Conclusion */}
+
         <p>
           In conclusion, our project's design journey taught us the importance
           of adaptability and user feedback. By embracing change and
