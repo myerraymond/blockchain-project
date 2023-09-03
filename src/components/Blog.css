@@ -1,16 +1,17 @@
+/* styles for the content */
 .blog-container {
     background-color: #f9f9f9;
-    text-align: center;
     color: #333;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   }
   
+/* styles for the title */
   .blog-title {
     font-size: 2.5rem;
     text-align: center;
-    color: #2e445b;
+    color: #007bff; 
     margin-bottom: 10px;
   }
   
@@ -19,6 +20,7 @@
     margin-bottom: 20px;
   }
   
+  /* Styles for section titles*/
   .section-title {
     font-size: 1.5rem;
     background-color:#2e445b;
@@ -28,6 +30,7 @@
     margin-bottom: 10px;
   }
   
+  /* Styles for individual blog sections */
   .blog-section {
     margin-bottom: 30px;
     padding: 16px;
@@ -49,6 +52,7 @@
     margin: 20px 0;
   }
   
+  /* Styles for the images used in the blog page */
   .design-image,
   .figma-image {
     width: 80%;
@@ -63,6 +67,7 @@
     cursor: pointer; 
   }
   
+  /* Hover effect for the design images */
   .design-image:hover,
   .figma-image:hover {
     transform: scale(1.1);
