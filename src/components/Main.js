@@ -14,14 +14,14 @@ import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableRow from '@mui/material/TableRow';
 import TableCell from '@mui/material/TableCell';
-import Alert from '@mui/material/Alert'; 
+import Alert from '@mui/material/Alert';
 import NodeGraph from './NodeGraph.js';
-
 
 // Function to create a data row for detailed table
 function createData(key, value) {
   return { key, value };
 }
+
 
 // Define the main function of the component named DetailedDetailsTable
 function DetailedDetailsTable({ details }) {
@@ -97,7 +97,7 @@ function App() {
       // Set state variables to display address details and show success alert
       setSearchedAddress(address);
       setAddressDetails(details);
-      setShowAlert(true); 
+      setShowAlert(true);
     } else {
       // Clear state variables and hide the alert in case of an error or no data found
       setSearchedAddress('');
@@ -105,7 +105,7 @@ function App() {
       setShowAlert(false);
     }
   };
-  
+
   // simulated function to fetch address details (replace with actual API eventually)
   async function fetchAddressDetails(address) {
     try {
@@ -195,7 +195,8 @@ function App() {
             <NodeGraph details={addressDetails} />
           )}
 
-        
+      
+
         </Box>
       </Container>
     </ThemeProvider>
