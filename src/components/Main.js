@@ -81,17 +81,18 @@ function App() {
       // Create an array of details using the createData function
       const details = [
         createData('Address', fetchedDetails.address),
-        createData('Balance', fetchedDetails.balance),
-        createData('Transactions', fetchedDetails.transactions),
-        createData('Last Transaction', fetchedDetails.lastTransactionTime),
-        createData('Total Received', fetchedDetails.totalReceived),
-        createData('Total Sent', fetchedDetails.totalSent),
-        createData('Active Since', fetchedDetails.activeSince),
-        createData('Transaction ID', fetchedDetails.transactionID),
+        createData('Hash',fetchedDetails.hash),
+        createData('Value', fetchedDetails.value),
         createData('Input', fetchedDetails.input),
-        createData('Output', fetchedDetails.output),
-        createData('Transaction Feed', fetchedDetails.transactionFee),
-        createData('Digital Signature', fetchedDetails.digitalSignature),
+        createData('Transaction Index', fetchedDetails.transaction_index),
+        createData('Gas',fetchedDetails.gas),
+        createData('Gas Used',fetchedDetails.gas_used),
+        createData('Gas Price',fetchedDetails.gas_price),
+        createData('Transaction Fee',fetchedDetails.transaction_fee),
+        createData('Block Number',fetchedDetails.block_number),
+        createData('Block Hash',fetchedDetails.block_hash),
+        createData('Block Timestamp',fetchedDetails.block_timestamp),
+      
       ];
 
       // Set state variables to display address details and show success alert
@@ -112,20 +113,17 @@ function App() {
       // Return sample address details (will be replaced API logic)
       return {
         address: address,
-        balance: '100 BTC',
-        transactions: '50',
-        lastTransactionTime: '2023-08-23 10:30:00',
-
-        transactionID: '0x4a5b3e8d9c2b1a0f6e7d8c9b2a1f0e6d',
-        input: '0x1234567890abcdef',
-        output: '0xabcdef1234567890',
-        transactionFee: '0.001 BTC',
-        digitalSignature: '3045022100...0220049D',
-
-        totalReceived: '200 BTC',
-        totalSent: '100 BTC',
-        activeSince: '2017-05-15',
-
+        hash: '0xf3a14bfddc65725b4a345e0bafa84afd328de1b9487339157a0f24c9085b66f2',
+        value: '31404516258391700000',
+        input: '0x',
+        transaction_index: '78',
+        gas: '2100',
+        gas_used: '2100',
+        gas_price: '11119629262',
+        transaction_fee: '233512214502000',
+        block_number: '15881178',
+        block_hash: '0x1fa4a14c221824759e748d37a91988d6a50bdce5d47bc729b6b3de3dbc6d8fa0',
+        block_timestamp: '1667378123',
       };
     } catch (error) {
       console.error('Error fetching address details:', error);
