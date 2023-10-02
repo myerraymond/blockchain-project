@@ -16,12 +16,14 @@
     "@testing-library/user-event": "^13.5.0",
     "ionicons": "^7.1.2",
     "react": "^17.0.0 || ^18.0.0",
+    "react-d3-tree": "^3.6.1",
     "react-dom": "^17.0.0 || ^18.0.0",
     "react-icons": "^4.10.1",
     "react-router": "^6.15.0",
     "react-router-dom": "^6.15.0",
     "react-scripts": "5.0.1",
     "styled-components": "^5.3.11",
+    "vis-network": "^9.1.6",
     "web-vitals": "^2.1.4"
   },
   "peerDependencies": {

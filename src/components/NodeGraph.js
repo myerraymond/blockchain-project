@@ -15,12 +15,6 @@ function NodeGraph({ details }) {
             const width = 928;
             const height = 600;
 
-             // Create links between nodes (none in this example)
-             const links = [
-                { source: details[0], target: details[1] },
-                { source: details[1], target: details[2] },
-                { source: details[2], target: details[0] },
-            ];
 
             // Select the SVG element using D3, assign width and height
             const svg = d3.select(graphRef.current)
@@ -28,19 +22,10 @@ function NodeGraph({ details }) {
                 .attr('height', height);
 
             // Create a D3 simulation
-            const simulation = d3.forceSimulation(details)
+            let simulation = d3.forceSimulation(details)
                 .force('center', d3.forceCenter(width / 2, height / 2))
-                .force('charge', d3.forceManyBody().strength(-30))
-                .force('link', d3.forceLink([]).id(d => d.key));
-
-            // Select and create link elements (none)
-            const link = svg.selectAll('.link')
-                .data(details)
-                .enter()
-                .append('g')
-                .attr('class', 'link')
-                .style('stroke', 'black')
-                .style('stroke-width', '2px');
+                .force('charge', d3.forceManyBody().strength(-10))
+                .force('link', d3.forceLink([]).id(d => d.key).distance(20).strength(1));
 
             // Create nodes (circles) for each detail
             const nodes = svg.selectAll('.node')
@@ -57,6 +42,11 @@ function NodeGraph({ details }) {
                     .on('end', dragEnded))
                 .on('mouseover', handleMouseOver) // Add mouseover event
                 .on('mouseout', handleMouseOut)    // Add mouseout event
+
+            nodes.append('text')
+                .attr('dx', 12)
+                .attr('dy', '.35em')
+                .text(function (d) { return 'cat'; });  // Set text label
 
             // Define function for handling drags    
             function dragStarted(event, d) {
@@ -97,7 +87,10 @@ function NodeGraph({ details }) {
                 nodes
                     .attr('cx', d => d.x)
                     .attr('cy', d => d.y);
+
             });
+
+
 
         }
     }, [details]); // Execute the effect when 'details' prop changes
@@ -127,5 +120,6 @@ function NodeGraph({ details }) {
         </svg>
     );
 }
+
 
 export default NodeGraph; // Export the NodeGraph component

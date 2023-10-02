@@ -16,12 +16,12 @@ import TableRow from '@mui/material/TableRow';
 import TableCell from '@mui/material/TableCell';
 import Alert from '@mui/material/Alert';
 import NodeGraph from './NodeGraph.js';
+import './footer.css';
 
 // Function to create a data row for detailed table
 function createData(key, value) {
   return { key, value };
 }
-
 
 // Define the main function of the component named DetailedDetailsTable
 function DetailedDetailsTable({ details }) {
@@ -81,18 +81,18 @@ function App() {
       // Create an array of details using the createData function
       const details = [
         createData('Address', fetchedDetails.address),
-        createData('Hash',fetchedDetails.hash),
+        createData('Hash', fetchedDetails.hash),
         createData('Value', fetchedDetails.value),
         createData('Input', fetchedDetails.input),
         createData('Transaction Index', fetchedDetails.transaction_index),
-        createData('Gas',fetchedDetails.gas),
-        createData('Gas Used',fetchedDetails.gas_used),
-        createData('Gas Price',fetchedDetails.gas_price),
-        createData('Transaction Fee',fetchedDetails.transaction_fee),
-        createData('Block Number',fetchedDetails.block_number),
-        createData('Block Hash',fetchedDetails.block_hash),
-        createData('Block Timestamp',fetchedDetails.block_timestamp),
-      
+        createData('Gas', fetchedDetails.gas),
+        createData('Gas Used', fetchedDetails.gas_used),
+        createData('Gas Price', fetchedDetails.gas_price),
+        createData('Transaction Fee', fetchedDetails.transaction_fee),
+        createData('Block Number', fetchedDetails.block_number),
+        createData('Block Hash', fetchedDetails.block_hash),
+        createData('Block Timestamp', fetchedDetails.block_timestamp),
+
       ];
 
       // Set state variables to display address details and show success alert
@@ -135,7 +135,7 @@ function App() {
   return (
     <ThemeProvider theme={defaultTheme}>
       <CssBaseline />
-      <Container component="main" maxWidth="xs">
+      <Container component="main" maxWidth="lg">
         <Box
           sx={{
             marginTop: 10,
@@ -192,11 +192,15 @@ function App() {
           {addressDetails.length > 0 && (
             <NodeGraph details={addressDetails} />
           )}
-
-      
-
         </Box>
       </Container>
+      <footer className="footer">
+        <div className="container">
+          <div className="footer-bottom">
+            <p>&copy; {new Date().getFullYear()} Team 1. All Rights Reserved. Property of Myer, Yasindu and Rajashi.</p>
+          </div>
+        </div>
+      </footer>
     </ThemeProvider>
   );
 }
