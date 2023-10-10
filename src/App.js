@@ -11,6 +11,7 @@ import Blog from "./components/Blog";
 
 
 function App() {
+  
   // Create the custom theme
   const defaultTheme = createTheme({
     palette: {
@@ -29,6 +30,7 @@ function App() {
     },
   });
 
+
   return (
     // Wrap the entire app with the ThemeProvider to apply custom themes
     <ThemeProvider theme={defaultTheme}>
@@ -44,6 +46,7 @@ function App() {
         <Route path="/Blog" element={<Blog /> } />
         </Routes>
 
+      
    </ThemeProvider>
   );
 }

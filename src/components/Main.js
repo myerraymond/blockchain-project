@@ -192,6 +192,8 @@ function App() {
           {addressDetails.length > 0 && (
             <NodeGraph details={addressDetails} />
           )}
+
+          
         </Box>
       </Container>
       <footer className="footer">
