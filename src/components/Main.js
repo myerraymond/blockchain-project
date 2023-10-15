@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -17,6 +17,12 @@ import TableCell from '@mui/material/TableCell';
 import Alert from '@mui/material/Alert';
 import NodeGraph from './NodeGraph.js';
 import './footer.css';
+import axios from "axios";
+import '../App.js';
+import './main.py';
+import { saveAs } from 'file-saver';
+import DataDisplay from './DataDisplay';
+
 
 // Function to create a data row for detailed table
 function createData(key, value) {
@@ -27,6 +33,7 @@ function createData(key, value) {
 function DetailedDetailsTable({ details }) {
   return (
     <TableContainer>
+      Data being displayed are from the searched Wallet Address:
       <Table aria-label="Detailed Details Table">
         <TableBody>
           {details.map((row) => (
@@ -40,7 +47,6 @@ function DetailedDetailsTable({ details }) {
     </TableContainer>
   );
 }
-
 
 // Create a default theme
 const defaultTheme = createTheme({
@@ -60,7 +66,6 @@ const defaultTheme = createTheme({
   },
 });
 
-
 // Define the main function component named App
 function App() {
   // Define state variables for the searched address, address details, and alert visibility
@@ -68,7 +73,99 @@ function App() {
   const [addressDetails, setAddressDetails] = React.useState([]);
   const [showAlert, setShowAlert] = React.useState(false);
 
-  // Fucntion to handle form submission when searching for an address
+  const [setResponseData] = React.useState(null);
+
+  // const callbackFunction = (data) => {
+  //   setPassedData(data);
+  // }
+
+
+  //const [searchedAddress, setSearchedAddress] = useState('');
+
+  //const [searchedAddress, setSearchedAddress] = useState('');
+  const [data, setData] = useState([]);
+
+
+  function DataTable({ data }) {
+    return (
+      <table>
+        <thead>
+          <tr>
+            <th>Key</th>
+            <th>Value</th>
+          </tr>
+        </thead>
+        <tbody>
+          {data.map((item, index) => (
+            <tr key={index}>
+              <td>{item.key}</td>
+              <td>{item.value}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    );
+  }
+
+  // Function to save data to a JSON file
+  function saveDataToFile(data) {
+    // Convert the data to a JSON string
+    const jsonData = JSON.stringify(data);
+
+    // Create a Blob from the JSON string
+    const blob = new Blob([jsonData], { type: 'application/json' });
+
+    // Use FileSaver.js to save the Blob as a file
+    saveAs(blob, 'data.json');
+  }
+
+  const handleButtonClick = () => {
+    // //const [searchedAddress, setSearchedAddress] = useState('');
+    // const [data, setData] = useState([]);
+    try {
+      axios.get('http://127.0.0.1:8000/graph', {
+        params: { address: searchedAddress }, // Use "address" as the query parameter name
+      })
+        .then((response) => {
+          if (response.data && Array.isArray(response.data)) {
+            // Data structure appears to be as expected, you can proceed here
+            console.log(response.data);
+            setData(response.data);
+
+            // You can also save the data to a JSON file here
+            // saveDataToFile(response.data);
+          } else {
+            console.error('Data is not in the expected format.');
+          }
+        })
+        .catch((error) => {
+          console.error('Error while fetching data:', error);
+        });
+    } catch (error) {
+      console.error('An error occurred:', error);
+    }
+  };
+
+
+  // useEffect(() => {
+  //   console.log(data);
+  // }, [data]);
+
+
+
+  // axios
+  //   .get("http://127.0.0.1:8000/graph?address=${address}")
+  //   .then((response) => {
+  //     console.log(response.data);
+  //     setResponseData(response.data);
+  //   })
+  //   .catch((error) => {
+  //     console.error("there are errors:", error);
+  //   });
+
+
+
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -94,7 +191,6 @@ function App() {
         createData('Block Timestamp', fetchedDetails.block_timestamp),
 
       ];
-
       // Set state variables to display address details and show success alert
       setSearchedAddress(address);
       setAddressDetails(details);
@@ -131,6 +227,7 @@ function App() {
     }
   };
 
+
   // Render the main application content
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -144,6 +241,7 @@ function App() {
             alignItems: 'center',
           }}
         >
+
           <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
             <CurrencyBitcoinIcon
               sx={{
@@ -167,19 +265,23 @@ function App() {
                   label="Wallet Address..."
                   name="wallet"
                   autoComplete="wallet"
+                  value={searchedAddress}
+                  onChange={(e) => setSearchedAddress(e.target.value)}
                 />
+
                 {showAlert && ( // Show the alert when showAlert is true
                   <Alert variant="filled" severity="success" sx={{ mt: 1 }}>
                     Wallet address found!
                   </Alert>
                 )}
+
                 {addressDetails.length > 0 && (
                   <DetailedDetailsTable details={addressDetails} />
                 )}
               </Grid>
             </Grid>
 
-            <Button
+            <Button onClick={handleButtonClick} // Use the defined function here
               type="submit"
               fullWidth
               variant="contained"
@@ -187,13 +289,32 @@ function App() {
             >
               Search
             </Button>
+
           </Box>
 
           {addressDetails.length > 0 && (
             <NodeGraph details={addressDetails} />
           )}
 
+
+          {addressDetails.length > 0 && (
+            <DataTable onclick={handleButtonClick} data={data} />
+          )}
+
+          {addressDetails.length > 0 && (
+            <Grid container spacing={2}>
+              <Grid item xs={6}>
+                <DataTable data={data} />
+              </Grid>
+              <Grid item xs={6}>
+                <DataTable data={data} />
+              </Grid>
+            </Grid>
+          )}
+
           
+          <DataDisplay data={data} />
+
         </Box>
       </Container>
       <footer className="footer">
@@ -203,7 +324,9 @@ function App() {
           </div>
         </div>
       </footer>
+
     </ThemeProvider>
+
   );
 }
 

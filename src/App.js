@@ -30,7 +30,8 @@ function App() {
     },
   });
 
-
+  const url = "http://127.0.0.1:8000";
+  
   return (
     // Wrap the entire app with the ThemeProvider to apply custom themes
     <ThemeProvider theme={defaultTheme}>
