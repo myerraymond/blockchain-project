@@ -21,7 +21,6 @@ import axios from "axios";
 import '../App.js';
 import './main.py';
 import { saveAs } from 'file-saver';
-import DataDisplay from './DataDisplay';
 
 
 // Function to create a data row for detailed table
@@ -123,14 +122,17 @@ function App() {
     // //const [searchedAddress, setSearchedAddress] = useState('');
     // const [data, setData] = useState([]);
     try {
-      axios.get('http://127.0.0.1:8000/graph', {
+      axios.get('http://127.0.0.1:8000/results', {
         params: { address: searchedAddress }, // Use "address" as the query parameter name
       })
         .then((response) => {
-          if (response.data && Array.isArray(response.data)) {
+          console.log(response)
+          if (response.data && Array.isArray(response.data.nodes) && Array.isArray(response.data.links)) {
             // Data structure appears to be as expected, you can proceed here
-            console.log(response.data);
-            setData(response.data);
+            console.log(response.data.links);
+            console.log(response.data.nodes);
+            setData(response.data.nodes.links);
+
 
             // You can also save the data to a JSON file here
             // saveDataToFile(response.data);
@@ -148,8 +150,16 @@ function App() {
 
 
   // useEffect(() => {
-  //   console.log(data);
-  // }, [data]);
+  //   // Fetch the JSON data from the file
+  //   fetch('results.json')
+  //     .then((response) => response.json())
+  //     .then((json) => {
+  //       setData(json); // Set the JSON data to the state
+  //     })
+  //     .catch((error) => {
+  //       console.error('Error fetching JSON data:', error);
+  //     });
+  // }, []);
 
 
 
@@ -230,6 +240,7 @@ function App() {
 
   // Render the main application content
   return (
+
     <ThemeProvider theme={defaultTheme}>
       <CssBaseline />
       <Container component="main" maxWidth="lg">
@@ -292,7 +303,7 @@ function App() {
 
           </Box>
 
-          {addressDetails.length > 0 && (
+          {/* {addressDetails.length > 0 && (
             <NodeGraph details={addressDetails} />
           )}
 
@@ -310,10 +321,10 @@ function App() {
                 <DataTable data={data} />
               </Grid>
             </Grid>
-          )}
+          )} */}
 
-          
-          <DataDisplay data={data} />
+
+
 
         </Box>
       </Container>
