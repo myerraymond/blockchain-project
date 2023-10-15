@@ -25,49 +25,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# The following API filters movies by their title's first letter, and it is case-sensitive.
-# To use the API, you must provide the required parameter "letter"
-
-# Test API url:
-# http://127.0.0.1:8000/graph?letter=I
-# http://127.0.0.1:8000/graph?letter=B
-
-# @app.get("/graph")
-# async def funcTest(address: str):
-#     result = []
-
-#     # connect to GDB
-#     driver = GraphDatabase.driver(uri, auth=(user, password))
-#     d_add = driver.get_server_info().address
-#     session = driver.session(database="neo4j")
-
-#     # replacing the quatation marks with single quotations
-#     address1 = address.replace('\'', '')
-#     # result.append(address1)
-    
-#     # address1 = '0x8d08aad4b2bac2bb761ac4781cf62468c9ec47b4'
-#     # run query
-#     try:
-#         wallet_address = session.execute_read(
-#             get_from_address,
-#             address1
-#         )
-#         # result.append(wallet_address)
-#         for item in wallet_address:
-#             addressId = item[0]
-#             type = item[1]
-#             result.append({ "address_id":addressId,"type":type})
-#             # result.append({"from_address":from_address, "to_address":to_address})
-#     except:
-#         result.append("Error")
-
-#     # unless you created them using the with statement 
-#     # call the .close() method on all Driver and Session instances to release any resources still held by them.
-#     session.close()
-#     driver.close()
-
-# #     return result
-
 
 @app.get("/results")
 async def funcTest(address: str):
@@ -157,24 +114,3 @@ def get_from_address(tx, get_from_address):
     #              RETURN properties(rel);
     # return a list of Record objects
     return list(result)  
-
-
-# @app.get("/jsonData")
-# async def funcTest():
-#         jsonResult = {
-#             "address": 'Address_id'
-#         }
-
-#         return jsonResult
-
-
-
-# class Result(BaseModel):
-#     name: str
-#     description: str = None
-#     price: float
-#     tax: float = None
-
-# @app.post("/results/", response_model=Result)
-# def create_item(result: result):
-#     return result
