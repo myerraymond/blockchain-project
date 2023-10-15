@@ -66,7 +66,7 @@ app.add_middleware(
 #     session.close()
 #     driver.close()
 
-#     return result
+# #     return result
 
 
 @app.get("/results")

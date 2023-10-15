@@ -16,3 +16,43 @@
 .link {
     fill: none;
 }
+
+.tableContainer {
+    overflow: auto;
+    max-height: 440px;
+  }
+  
+  .tableCell {
+    border: 1px solid #000000; 
+  }
+  
+  .tableCell:last-child {
+    border-right: 1px solid #ddd;
+  }
+  
+  .tableHeadCell {
+    background-color: #3498db;
+    color: white;
+    border: 1px solid #ddd;
+  
+  }
+  
+  .tableContainer {
+    overflow: auto;
+    max-height: 500px;
+    max-width:1000px ;
+    margin-left: 200px;
+    margin-top: 100px;
+  
+  }
+  
+  .tableRow {
+    @media (max-width: 600px) {
+      display: block;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }

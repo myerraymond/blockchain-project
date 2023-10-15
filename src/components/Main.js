@@ -17,6 +17,7 @@ import TableCell from '@mui/material/TableCell';
 import Alert from '@mui/material/Alert';
 import './footer.css';
 import axios from "axios";
+import StickyHeadTable from './stickyheader';
 // import '../App.js';
 // import './main.py';
 
@@ -88,14 +89,14 @@ function App() {
   //       console.log(response);
   //       if (response.data && response.data.nodes) {
   //         console.log(response.data.nodes);
-  
+
   //         const fetchedDetails = response.data.nodes;
-  
+
   //         // You can map over fetchedDetails and create data for each node here
   //         const addressDetails = fetchedDetails.map((node) => {
   //           return createData('Address ID', node.address_id);
   //         });
-  
+
   //         setAddressDetails(addressDetails);
   //         setSearchedAddress(searchedAddress);
   //         setShowAlert(true);
@@ -108,7 +109,6 @@ function App() {
   //     });
   // };
 
-
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
@@ -116,32 +116,34 @@ function App() {
         params: { address: searchedAddress },
       })
         .then((response) => {
-          console.log(response)
+          console.log(response);
           if (response.data && Array.isArray(response.data.nodes)) {
             console.log(response.data.nodes);
 
-            // const fetchedDetails = response.data.nodes;
-            // Get the values from the JSON file
-            const fetchedDetails = response.data.nodes; // Assuming you want the first item in the array
-            
-            console.log(fetchedDetails);
-            
-            setAddressDetails([
-             // createData('Address', fetchedDetails.address),
-              createData('Hash', fetchedDetails.hash),
-              createData('Value', fetchedDetails.value),
-              createData('Input', fetchedDetails.input),
-              createData('Transaction Index', fetchedDetails.transaction_index),
-              createData('Gas', fetchedDetails.gas),
-              createData('Gas Used', fetchedDetails.gas_used),
-              createData('Gas Price', fetchedDetails.gas_price),
-              createData('Transaction Fee', fetchedDetails.transaction_fee),
-              createData('Block Number', fetchedDetails.block_number),
-              createData('Block Hash', fetchedDetails.block_hash),
-              createData('Block Timestamp', fetchedDetails.block_timestamp),
-            ]);
-            setSearchedAddress(searchedAddress);
-            setShowAlert(true);
+            // Assuming that response.data.nodes is an array
+            if (response.data.nodes.length > 0) {
+              const fetchedDetails = response.data.nodes[0].address_id;
+
+              const details = [
+                createData('Hash', fetchedDetails.hash),
+                createData('Value', fetchedDetails.value),
+                createData('Input', fetchedDetails.input),
+                createData('Transaction Index', fetchedDetails.transaction_index),
+                createData('Gas', fetchedDetails.gas),
+                createData('Gas Used', fetchedDetails.gas_used),
+                createData('Gas Price', fetchedDetails.gas_price),
+                createData('Transaction Fee', fetchedDetails.transaction_fee),
+                createData('Block Number', fetchedDetails.block_number),
+                createData('Block Hash', fetchedDetails.block_hash),
+                createData('Block Timestamp', fetchedDetails.block_timestamp),
+              ];
+
+              setAddressDetails(details);
+              setSearchedAddress(searchedAddress);
+              setShowAlert(true);
+            } else {
+              console.error('No data available for this address.');
+            }
           } else {
             console.error('Data is not in the expected format.');
           }
@@ -153,6 +155,76 @@ function App() {
       console.error('An error occurred:', error);
     }
   };
+
+
+
+
+
+
+
+
+
+
+
+
+
+  // const handleSubmit = async (event) => {
+  //   event.preventDefault();
+  //   try {
+  //     axios.get('http://127.0.0.1:8000/results', {
+  //       params: { address: searchedAddress },
+  //     })
+  //       .then((response) => {
+  //         console.log(response)
+  //         if (response.data && Array.isArray(response.data.nodes)) {
+  //           console.log(response.data.nodes);
+
+
+  //             // const fetchedDetails = response.data.nodes;
+  //             // Get the values from the JSON file
+  //             const fetchedDetails = response.data.nodes; // Assuming you want the first item in the array
+
+  //             console.log(fetchedDetails);
+
+  //             setAddressDetails([
+  //             // createData('Address', fetchedDetails.address),
+  //               createData('Hash', fetchedDetails.hash),
+  //               createData('Value', fetchedDetails.value),
+  //               createData('Input', fetchedDetails.input),
+  //               createData('Transaction Index', fetchedDetails.transaction_index),
+  //               createData('Gas', fetchedDetails.gas),
+  //               createData('Gas Used', fetchedDetails.gas_used),
+  //               createData('Gas Price', fetchedDetails.gas_price),
+  //               createData('Transaction Fee', fetchedDetails.transaction_fee),
+  //               createData('Block Number', fetchedDetails.block_number),
+  //               createData('Block Hash', fetchedDetails.block_hash),
+  //               createData('Block Timestamp', fetchedDetails.block_timestamp),
+  //             ]);
+  //           setSearchedAddress(searchedAddress);
+  //           setShowAlert(true);
+  //         } else {
+  //           console.error('Data is not in the expected format.');
+  //         }
+  //       })
+  //       .catch((error) => {
+  //         console.error('Error while fetching data:', error);
+  //       });
+  //   } catch (error) {
+  //     console.error('An error occurred:', error);
+  //   }
+  // };
+
+
+
+
+
+
+
+
+
+
+
+
 
   // // simulated function to fetch address details (replace with actual API eventually)
   // async function fetchAddressDetails(address) {
@@ -226,6 +298,7 @@ function App() {
                 {addressDetails.length > 0 && (
                   <DetailedDetailsTable details={addressDetails} />
                 )}
+
               </Grid>
             </Grid>
             <Button
@@ -236,6 +309,17 @@ function App() {
             >
               Search
             </Button>
+
+            {addressDetails.length > 0 && (
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{ mt: 3, mb: 2 }}
+              >
+                Show more transactions!!!
+              </Button>)}
+
           </Box>
         </Box>
       </Container>
