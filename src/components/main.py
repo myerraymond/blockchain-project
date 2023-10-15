@@ -32,41 +32,41 @@ app.add_middleware(
 # http://127.0.0.1:8000/graph?letter=I
 # http://127.0.0.1:8000/graph?letter=B
 
-@app.get("/graph")
-async def funcTest(address: str):
-    result = []
+# @app.get("/graph")
+# async def funcTest(address: str):
+#     result = []
 
-    # connect to GDB
-    driver = GraphDatabase.driver(uri, auth=(user, password))
-    d_add = driver.get_server_info().address
-    session = driver.session(database="neo4j")
+#     # connect to GDB
+#     driver = GraphDatabase.driver(uri, auth=(user, password))
+#     d_add = driver.get_server_info().address
+#     session = driver.session(database="neo4j")
 
-    # replacing the quatation marks with single quotations
-    address1 = address.replace('\'', '')
-    # result.append(address1)
+#     # replacing the quatation marks with single quotations
+#     address1 = address.replace('\'', '')
+#     # result.append(address1)
     
-    # address1 = '0x8d08aad4b2bac2bb761ac4781cf62468c9ec47b4'
-    # run query
-    try:
-        wallet_address = session.execute_read(
-            get_from_address,
-            address1
-        )
-        # result.append(wallet_address)
-        for item in wallet_address:
-            addressId = item[0]
-            type = item[1]
-            result.append({ "address_id":addressId,"type":type})
-            # result.append({"from_address":from_address, "to_address":to_address})
-    except:
-        result.append("Error")
+#     # address1 = '0x8d08aad4b2bac2bb761ac4781cf62468c9ec47b4'
+#     # run query
+#     try:
+#         wallet_address = session.execute_read(
+#             get_from_address,
+#             address1
+#         )
+#         # result.append(wallet_address)
+#         for item in wallet_address:
+#             addressId = item[0]
+#             type = item[1]
+#             result.append({ "address_id":addressId,"type":type})
+#             # result.append({"from_address":from_address, "to_address":to_address})
+#     except:
+#         result.append("Error")
 
-    # unless you created them using the with statement 
-    # call the .close() method on all Driver and Session instances to release any resources still held by them.
-    session.close()
-    driver.close()
+#     # unless you created them using the with statement 
+#     # call the .close() method on all Driver and Session instances to release any resources still held by them.
+#     session.close()
+#     driver.close()
 
-    return result
+#     return result
 
 
 @app.get("/results")
